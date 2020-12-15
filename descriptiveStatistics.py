@@ -1,3 +1,4 @@
+from numpy.core.fromnumeric import sort
 from menu import identify_option
 import numpy as np
 
@@ -69,6 +70,7 @@ def descriptiveStatistics():
                                 medianDone = False
                             else:
                                 print(medianList)
+                                #print(sorted(medianList))
                                 print(np.median(medianList))
                 if(option_info == 3):
                     done = True
@@ -76,25 +78,38 @@ def descriptiveStatistics():
                     print("You're in Trimmed mode")
                     trimmedList = []
                     while trimmedDone != True:
-                        trimmedInput = input("Enter the scores to get the median (If you finish enter a key that is not equal to a number): ")
+                        trimmedInput = input("Enter the scores to get the Trimmed Mean (If you finish enter a key that is not equal to a number): ")
                         score_info = isFloat(trimmedInput)
                         if score_info != -1:
                             trimmedList.append(score_info)
                         elif score_info == -1:
-                            medianDone = True
+                            trimmedDone = True
                             if len(trimmedList) <= 0:
                                 print("The list is empty or you have invalid scores")
                                 trimmedDone = False
-                            else:
+                            else:          
                                 print(trimmedList)
-                                #print(np.(trimmedList))
-                    
-                    
-                    
-                    
-                    
-                         
-                    
-            
-            
-        
+                                valT = int(input("Enter the percent that you want to trim (Eg. 10% will be '10'): "))
+                                valT_info = isFloat(valT)
+                                if valT_info != -1:
+                                    lenList = len(trimmedList)
+                                    valRemoved = lenList * (valT / 100)
+                                    finalValueToRemove = int(np.ceil(valRemoved))
+                                    print(finalValueToRemove)
+                                    for i in range(finalValueToRemove):
+                                        del trimmedList[0]
+                                        del trimmedList[-1]
+                                    
+                                    
+                                # elif(finalValueToRemove == 0.0):
+                                #     print("Any value will be trimmed because the percent is too small")
+                                
+                                # else:
+                                #     print("Value is to big to be trimmed by this calculator")
+                                    
+                                    print(trimmedList)
+                                    print(np.average(trimmedList))
+                                    
+                                    
+                                    
+                                
