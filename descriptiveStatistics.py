@@ -1,33 +1,15 @@
 from menu import identify_option
 import numpy as np
-import re
-
-def valid(option):
-    
-    finder_Letter = re.findall("[a-z]", option)
-    
-    
-    if finder_Letter:
-        return -1
-    else:
-        return False
-    
 
 def isFloat(option):
-    if valid(option) != -1:
-        try: 
-            data = float(option)
-            if type(data) is float:
-                return data
-            else:
-                return -1
-        except ValueError:
+    try: 
+        data = float(option)
+        if type(data) is float:
+            return data
+        else:
             return -1
-    else:
-        try: 
-            return -1
-        except RuntimeWarning:
-            return -1
+    except ValueError:
+        return -1
   
 #Descripive Statistics
 def descriptiveStatistics():
@@ -54,9 +36,7 @@ def descriptiveStatistics():
                 if(option_info == 1):
                     deepDone = True
                     avgDone = False
-                    print("You're in DeepDone")
-                    sumScores = 0
-                    
+                    print("You're in DeepDone") 
                     avgList = []
                     
                     while avgDone != True:
