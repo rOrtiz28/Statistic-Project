@@ -52,6 +52,46 @@ def descriptiveStatistics():
                             else:
                                 print(avgList)
                                 print(np.average(avgList))
+                if(option_info == 2):
+                    done = True
+                    medianDone = False
+                    print("You're in the median")
+                    medianList = []
+                    while medianDone != True:
+                        medianInput = input("Enter the scores to get the median (If you finish enter a key that is not equal to a number): ")
+                        score_info = isFloat(medianInput)
+                        if score_info != -1:
+                            medianList.append(score_info)
+                        elif score_info == -1:
+                            medianDone = True
+                            if len(medianList) <= 0:
+                                print("The list is empty or you have invalid scores")
+                                medianDone = False
+                            else:
+                                print(medianList)
+                                print(np.median(medianList))
+                if(option_info == 3):
+                    done = True
+                    trimmedDone = False
+                    print("You're in Trimmed mode")
+                    trimmedList = []
+                    while trimmedDone != True:
+                        trimmedInput = input("Enter the scores to get the median (If you finish enter a key that is not equal to a number): ")
+                        score_info = isFloat(trimmedInput)
+                        if score_info != -1:
+                            trimmedList.append(score_info)
+                        elif score_info == -1:
+                            medianDone = True
+                            if len(trimmedList) <= 0:
+                                print("The list is empty or you have invalid scores")
+                                trimmedDone = False
+                            else:
+                                print(trimmedList)
+                                #print(np.(trimmedList))
+                    
+                    
+                    
+                    
                     
                          
                     
