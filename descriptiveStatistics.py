@@ -11,7 +11,21 @@ def isFloat(option):
             return -1
     except ValueError:
         return -1
-  
+    except TypeError:
+        return -1
+
+def valid_ValT():
+    vFlag = True
+    while vFlag == True:
+        valT = (input("Enter the percent that you want to trim (Eg. 10% will be '10'): "))
+        valT_info = isFloat(valT)
+        if valT_info != -1:
+            vFlag = False
+            return valT_info
+        else:
+            print("Invalid input, Please use a integer like the following: 10% will be 10")
+            vFlag = True
+    
 #Descripive Statistics
 def descriptiveStatistics():
     done = False
@@ -88,27 +102,24 @@ def descriptiveStatistics():
                                 print("The list is empty or you have invalid scores")
                                 trimmedDone = False
                             else:          
-                                print(trimmedList)
-                                valT = int(input("Enter the percent that you want to trim (Eg. 10% will be '10'): "))
-                                valT_info = isFloat(valT)
-                                if valT_info != -1:
-                                    lenList = len(trimmedList)
-                                    valRemoved = lenList * (valT / 100)
-                                    finalValueToRemove = int(np.ceil(valRemoved))
-                                    print(finalValueToRemove)
+                                print("Unsorted List:", trimmedList)
+                                valid_TrimmedList = sorted(trimmedList)
+                                print("Sorted List:", valid_TrimmedList)
+                                valT_Valid = valid_ValT()
+                                lenList = len(trimmedList)
+                                valRemoved = lenList * (valT_Valid / 100)
+                                finalValueToRemove = int(np.ceil(valRemoved))
+                                print(finalValueToRemove)
+                                if lenList >= (finalValueToRemove * 2):
                                     for i in range(finalValueToRemove):
-                                        del trimmedList[0]
-                                        del trimmedList[-1]
-                                    
-                                    
-                                # elif(finalValueToRemove == 0.0):
-                                #     print("Any value will be trimmed because the percent is too small")
+                                        del valid_TrimmedList[0]
+                                        del valid_TrimmedList[-1]
                                 
-                                # else:
-                                #     print("Value is to big to be trimmed by this calculator")
-                                    
-                                    print(trimmedList)
-                                    print(np.average(trimmedList))
+                                    print(valid_TrimmedList)
+                                    print(np.average(valid_TrimmedList))
+                                else:
+                                    print("The percent of values that you want to trim is more than the list number!")
+                                    trimmedDone = False
                                     
                                     
                                     
