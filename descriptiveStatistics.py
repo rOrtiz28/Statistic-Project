@@ -1,7 +1,9 @@
 from numpy.core.fromnumeric import sort
 from menu import identify_option
 import numpy as np
+import statistics
 
+#This Function is to avoid Errors checking that have a valid input
 def isFloat(option):
     try: 
         data = float(option)
@@ -14,6 +16,7 @@ def isFloat(option):
     except TypeError:
         return -1
 
+#Ensure that have a valid Trimmed value (Percent %)
 def valid_ValT():
     vFlag = True
     while vFlag == True:
@@ -25,7 +28,21 @@ def valid_ValT():
         else:
             print("Invalid input, Please use a integer like the following: 10% will be 10")
             vFlag = True
-    
+
+#Find the MODE
+def mode(modeList):
+    finalMode = statistics.mode(modeList)
+    modeFlag = False
+    while modeFlag == False:
+        if modeList.count(modeList[0]) == 1 and finalMode == modeList[0]:
+            print("No more modes found")
+            modeFlag = True
+                                        
+        else:
+            print("Mode:", finalMode)
+            modeList = [x for x in modeList if x != finalMode]
+            mode(modeList)
+               
 #Descripive Statistics
 def descriptiveStatistics():
     done = False
@@ -84,7 +101,7 @@ def descriptiveStatistics():
                                 medianDone = False
                             else:
                                 print(medianList)
-                                #print(sorted(medianList))
+                                print(sorted(medianList))
                                 print(np.median(medianList))
                 if(option_info == 3):
                     done = True
@@ -120,7 +137,30 @@ def descriptiveStatistics():
                                 else:
                                     print("The percent of values that you want to trim is more than the list number!")
                                     trimmedDone = False
+                if(option_info == 4):
+                    done = True
+                    modeDone = False   
+                    print("You're in the mode")
+                    modeList = []
+                    while modeDone != True:
+                        modeInput = input("Enter the scores to get the mode (If you finish enter a key that is not equal to a number): ")
+                        score_info = isFloat(modeInput)
+                        if score_info != -1:
+                            modeList.append(score_info)
+                        elif score_info == -1:
+                            modeDone = True
+                            if len(modeList) <= 0:
+                                print("The list is empty or you have invalid scores")
+                                modeDone = False
+                            else:
+                                print(modeList)
+                                finalMode = statistics.mode(modeList)
+                                finalMode = int(finalMode)
+                                if modeList.count(modeList[0]) == 1 and finalMode == modeList[0]:
+                                    print("No mode found")                 
+                                else:
+                                    mode(modeList)
+                if(option_info == 5):
+                    done = False
+                    deepDone = True
                                     
-                                    
-                                    
-                                
